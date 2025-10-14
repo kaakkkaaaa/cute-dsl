@@ -1,50 +1,50 @@
-import torch
-import numpy as np
 import cutlass
 import cutlass.cute as cute
 from cutlass.cute.runtime import from_dlpack
+import torch
+import numpy as np
 
-# Puzzle 1: Thread Indexing
-# Goal: Each thread writes its thread index to output
-# Concepts: thread_idx(), basic kernel structure
+# Puzzle 2: Thread Indexing - Understanding GPU Parallelism
+# Goal : Understand the GPU's hierarchical execution model: grids, blocks, and threads
+# Concepts:
+# - Grid: Collection of thread blocks
+# - Block: Group of threads that can cooperate
+# - Thread: Individual execution unit
+# - cute.arch.thread_idx() - thread index within block
+# - cute.arch.block_idx() - block index within grid
 
-def p01():
-    """
-    Fill in the kernel so each thread writes its x-coordinate to output.
+BLOCKS_PER_GRID = (3, 1, 1);
+THREADS_PER_BLOCK = (4, 1, 1);
 
-    Input: None
-    Output: [0, 1, 2, ..., 31] (32 threads)
-    """
+def p02():
     @cute.kernel
-    def thread_id_kernel(output: cute.Tensor):
+    def thread_id_kernel():
         tidx, _, _ = cute.arch.thread_idx();
-        # TODO: Write tidx to output[tidx]
-        output[tidx] = tidx;
+        bidx, _, _ = cute.arch.block_idx();
+        bdim, _, _ = cute.arch.block_dim();
+        # TODO: Copy input[global_id] to output[global_id]
+        global_idx = bidx * bdim + tidx;
+        cute.printf("Block %d, Thread %d ⟶ Global ID: %d\n", bidx, tidx, global_idx);
 
     @cute.jit
-    def run_kernel(output: cute.Tensor):
-        thread_id_kernel(output).launch(
-            grid=(1, 1, 1),
-            block=(32, 1, 1)
+    def run_thread_id():
+        thread_id_kernel().launch(
+            grid=BLOCKS_PER_GRID,
+            block=THREADS_PER_BLOCK
         );
 
-    return run_kernel
+    return run_thread_id
 
 def main():
-    output = torch.zeros(32, dtype=torch.int32, device="cuda");
-    cutlass.cuda.initialize_cuda_context();
-
-    kernel = p01();
-    kernel(from_dlpack(output));
-    print(f"\nOutput:\n{output}");
-
-    expected = torch.arange(32, dtype=torch.int32, device="cuda");
-    print(f"\nExpected:\n{expected}");
-
-    print("\n" + "="*60);
-    assert torch.allclose(output, expected), f"Expected {expected}, got {output}";
-    print("✅ Puzzle 01 passed!");
+    print("\n" + "=" * 60);
+    print("Testing Puzzle 02: Thread Indexing");
     print("="*60);
+
+    cutlass.cuda.initialize_cuda_context();
+    kernel = p02();
+    kernel();
+    print("\n✅ Puzzle 02 passed!\n");
+
 
 if __name__ == "__main__":
     main();
