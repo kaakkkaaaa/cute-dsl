@@ -4,7 +4,7 @@ from cutlass.cute.runtime import from_dlpack
 import torch
 import numpy as np
 
-# Puzzle 2: Thread Indexing - Understanding GPU Parallelism
+# Puzzle 1: Thread Indexing - Understanding GPU Parallelism
 # Goal : Understand the GPU's hierarchical execution model: grids, blocks, and threads
 # Concepts:
 # - Grid: Collection of thread blocks
