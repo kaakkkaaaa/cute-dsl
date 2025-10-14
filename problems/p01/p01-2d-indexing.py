@@ -4,7 +4,7 @@ from cutlass.cute.runtime import from_dlpack
 import torch
 import numpy as np
 
-# Puzzle 2: 2D Indexing
+# Puzzle 1: 2D Indexing
 # Goal: Access 2D tensor using row-major ordering
 # Concepts: Multi-dimensional indexing, shape/stride
 
