@@ -48,19 +48,19 @@ def p04():
 
 def main():
     print("\n" + "="*80);
-    print("Puzzle 05: Register Memory");
+    print("Puzzle 04: Register Memory");
     print("="*80 + "\n");
     inp = torch.arange(0, SIZE * ELEMENTS_PER_THREAD, dtype=torch.float32, device="cuda");
     out = torch.zeros(256, dtype=torch.float32, device="cuda");
 
     cutlass.cuda.initialize_cuda_context();
-    kernel = p05();
+    kernel = p04();
     kernel(from_dlpack(inp), from_dlpack(out));
     expected = torch.tensor([0, 1, 3, 6, 10, 15, 21, 28], dtype=torch.float32, device="cuda");
     assert torch.allclose(out[:8], expected);
     print("Output: ", out[:8].cpu().numpy());
     print("Expected: ", expected.cpu().numpy());
-    print("✅ Puzzle 05 Passed!");
+    print("✅ Puzzle 04 Passed!");
 
 if __name__ == "__main__":
     main();
