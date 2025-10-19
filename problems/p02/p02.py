@@ -49,7 +49,7 @@ def main():
     print(f"Output (first 10): {data[:10]}");
 
     assert torch.allclose(data, expected), "Add 10 failed!"
-    print("✅ Puzzle 02 passed!");
+    print("\n✅ Puzzle 02 passed!");
 
 
 if __name__ == "__main__":
