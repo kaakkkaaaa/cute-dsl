@@ -43,7 +43,7 @@ def main():
 
     print(f"Input (first 10): {data[:10]}");
 
-    kernel = p03();
+    kernel = p02();
     kernel(from_dlpack(data));
 
     print(f"Output (first 10): {data[:10]}");
