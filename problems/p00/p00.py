@@ -26,7 +26,6 @@ def p00():
         );
 
     return run_hello
-
 # ANCHOR_END: p00
 
 def main():
