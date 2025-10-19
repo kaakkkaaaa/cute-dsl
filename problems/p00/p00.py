@@ -40,7 +40,7 @@ def main():
     torch.cuda.synchronize();
 
     print("\n" + "="*60);
-    print("✓ Puzzle 00 completed!");
+    print("✅ Puzzle 00 completed!");
     print("="*60);
 
 if __name__ == "__main__":
