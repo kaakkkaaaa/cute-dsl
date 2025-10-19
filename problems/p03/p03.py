@@ -8,7 +8,7 @@ BLOCK_SIZE = 32;
 THREADS_PER_BLOCK = (BLOCK_SIZE, 1, 1);
 BLOCKS_PER_GRID = (4, 1, 1);
 
-def p04():
+def p03():
     """
     Reverse array within each block using shared memory.
     Input: [0, 1, 2, ..., 127]

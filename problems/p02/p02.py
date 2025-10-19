@@ -8,7 +8,7 @@ SIZE = 128;
 THREADS_PER_BLOCK = (32, 1, 1);
 BLOCKS_PER_GRID = (4, 1, 1);
 
-def p03():
+def p02():
     """
     Add 10 to each element in parallel.
     Input: [0, 1, 2, ..., 127]

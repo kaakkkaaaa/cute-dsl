@@ -8,7 +8,7 @@ THREADS_PER_BLOCK = (SIZE, 1, 1);
 BLOCKS_PER_GRID = (1, 1, 1);
 ELEMENTS_PER_THREAD = 8;
 
-def p05():
+def p04():
     """
     Compute running sum using register memory.
     Input: [0, 1, 2, 3, 4, 5, 6, 7, ...]

@@ -16,7 +16,7 @@ import numpy as np
 BLOCKS_PER_GRID = (3, 1, 1);
 THREADS_PER_BLOCK = (4, 1, 1);
 
-def p02():
+def p01():
     @cute.kernel
     def thread_id_kernel():
         tidx, _, _ = cute.arch.thread_idx();

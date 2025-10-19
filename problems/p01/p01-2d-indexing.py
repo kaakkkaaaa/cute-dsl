@@ -13,7 +13,7 @@ COLS = 8;
 THREAD_PER_BLOCK = (COLS, ROWS, 1);
 BLOCKS_PER_GRID = (1, 1, 1);
 
-def p02():
+def p01():
     """
     Copy 2D tensor (4x8) from input to output using proper 2D indexing.
 
