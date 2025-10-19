@@ -54,7 +54,7 @@ def main():
     
     print(f"Input (first block): {inp[:32]}");
     
-    kernel = p04();
+    kernel = p03();
     kernel(from_dlpack(inp), from_dlpack(out));
     
     print(f"Output (first block): {out[:32]}");
@@ -66,7 +66,7 @@ def main():
         expected_block = torch.flip(inp[start:end], [0]);
         assert torch.allclose(out[start:end], expected_block), f"Block {block} reversal failed!";
     
-    print("✅ Puzzle 04 passed!");
+    print("✅ Puzzle 03 passed!");
 
 
 if __name__ == "__main__":
