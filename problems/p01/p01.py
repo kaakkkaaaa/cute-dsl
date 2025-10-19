@@ -134,7 +134,7 @@ def main():
     print(f"\nExpected:\n{expected}");
     print("\n" + "="*60);
     assert torch.allclose(a, expected), f"Expected {expected}, got {output}";
-    print("✅ Puzzle 01b passed!");
+    print("\n✅ Puzzle 01b passed!");
     print("="*60);
 
 
@@ -154,7 +154,7 @@ def main():
 
     print("\n" + "="*60);
     assert torch.allclose(a, expected), f"Expected {expected}, got {output}";
-    print("✅ Puzzle 01c passed!");
+    print("\n✅ Puzzle 01c passed!");
     print("="*60);
 
 if __name__ == "__main__":
