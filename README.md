@@ -1,2 +1,2 @@
-# cute-dsl
-CuTe DSL GPU Puzzles 🧩
+# CuTe DSL GPU Puzzles 🧩
+
