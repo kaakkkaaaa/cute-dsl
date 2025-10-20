@@ -39,22 +39,22 @@ Basic GPU concepts - thread indexing, global memory, shared memory, registers
 ### Part 2: Tensors & Layouts (Puzzles 6-10)
 CuTe tensor basics, layout composition, coordinate systems, identity tensors
 
-### Part 3: Data Movement (Puzzles 11-15)
+### Part 3: Data Movement (Puzzles 11-15) - TBD
 Copy operations, vectorized loads, tiling, partitioning, zipped division
 
-### Part 4: Parallel Patterns (Puzzles 16-20)
+### Part 4: Parallel Patterns (Puzzles 16-20) - TBD
 Reductions (sum/min/max), matrix transpose, fused operations (AXPBY), custom binary ops
 
-### Part 5: Advanced Techniques (Puzzles 21-25)
+### Part 5: Advanced Techniques (Puzzles 21-25) - TBD
 Software pipelining, Tensor Cores, async copy, swizzling, basic GEMM
 
-### Part 6: Reductions & Pooling (Puzzles 26-30)
+### Part 6: Reductions & Pooling (Puzzles 26-30) - TBD
 Axis sum, warp reductions, max/avg pooling (1D/2D)
 
-### Part 7: Convolutions (Puzzles 31-35)
+### Part 7: Convolutions (Puzzles 31-35) - TBD
 Conv1D, Conv2D, separable/dilated/transposed convolutions
 
-### Part 8: Activation & Attention (Puzzles 36-40)
+### Part 8: Activation & Attention (Puzzles 36-40) - TBD
 Softmax, LayerNorm, scaled dot-product attention, multi-head attention, Flash Attention
 
 ## Key Concepts
