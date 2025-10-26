@@ -7,7 +7,7 @@ TILE_SIZE = 256;
 THREADS_PER_BLOCK = (128, 1, 1);
 BLOCKS_PER_GRID = (1, 1, 1);
 
-def p11a():
+def p10a():
     """Copy using block_dim to calculate work per thread"""
 
     @cute.kernel
@@ -50,7 +50,7 @@ def p11a():
     return run_kernel
 
 
-def p11b():
+def p10b():
     """Use enough blocks so each thread handles 1 element"""
     
     TOTAL_SIZE = 256;
@@ -105,7 +105,7 @@ def p11b():
     return run_kernel
 
 
-def p11c():
+def p10c():
     """Copy a 2D tile to shared memory with proper indexing."""
 
     @cute.kernel
@@ -149,16 +149,16 @@ def p11c():
 
 def main():
     print("\n" + "="*80);
-    print("Puzzle 11: Copy Operations");
+    print("Puzzle 10: Copy Operations");
     print("="*80 + "\n");
 
-    # Test p11a (Loop-based)
-    print("--- Test p11a: Loop-Based Approach ---");
+    # Test p10a (Loop-based)
+    print("--- Test p10a: Loop-Based Approach ---");
     inp_a = torch.arange(0, 256, dtype=torch.float32, device="cuda");
     out_a = torch.zeros(256, dtype=torch.float32, device="cuda");
 
     cutlass.cuda.initialize_cuda_context();
-    kernel_a = p11a();
+    kernel_a = p10a();
     kernel_a(from_dlpack(inp_a), from_dlpack(out_a));
     
     # Verify
@@ -169,12 +169,12 @@ def main():
     print("Expected (first 8):", expected_a[:8].cpu().numpy());
     print("Expected (last 8): ", expected_a[-8:].cpu().numpy());
 
-    # TEST P11b (Grid-based)
-    print("\n--- Test p11b: Grid-Based Approach ---");
+    # TEST p10b (Grid-based)
+    print("\n--- Test p10b: Grid-Based Approach ---");
     inp_b = torch.arange(0, 256, dtype=torch.float32, device="cuda");
     out_b = torch.arange(256, dtype=torch.float32, device="cuda");
 
-    kernel_b = p11b();
+    kernel_b = p10b();
     kernel_b(from_dlpack(inp_b), from_dlpack(out_b));
 
     # Verify
@@ -184,10 +184,10 @@ def main():
     print("Output (last 8):  ", out_b[-8:].cpu().numpy());
     print("Expected (first 8):", expected_b[:8].cpu().numpy());
     print("Expected (last 8): ", expected_b[-8:].cpu().numpy());
-    print("\n✅ p11b Passed!\n");
+    print("\n✅ p10b Passed!\n");
     
 
-    print("\n--- Test p11c: 2D Tile Copy ---");
+    print("\n--- Test p10c: 2D Tile Copy ---");
     TILE_M, TILE_N = 16, 32;
     TOTAL_SIZE = TILE_M * TILE_N;
 
@@ -199,7 +199,7 @@ def main():
     out_c = torch.zeros(TOTAL_SIZE, dtype=torch.float32, device="cuda");
 
     # Run kernel
-    kernel = p11c();
+    kernel = p10c();
     kernel(from_dlpack(inp_c), from_dlpack(out_c));
 
     # Verify full output
@@ -215,7 +215,7 @@ def main():
     print(out_2d);
 
     print("\n" + "="*80);
-    print("✅ Puzzle 11c Passed!");
+    print("✅ Puzzle 10c Passed!");
     print("="*80);
 
 if __name__ == "__main__":
