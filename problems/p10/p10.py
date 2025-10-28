@@ -169,7 +169,7 @@ def main():
     print("Expected (first 8):", expected_a[:8].cpu().numpy());
     print("Expected (last 8): ", expected_a[-8:].cpu().numpy());
 
-    # TEST P11b (Grid-based)
+    # TEST p10b (Grid-based)
     print("\n--- Test p10b: Grid-Based Approach ---");
     inp_b = torch.arange(0, 256, dtype=torch.float32, device="cuda");
     out_b = torch.arange(256, dtype=torch.float32, device="cuda");

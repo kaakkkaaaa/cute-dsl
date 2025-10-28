@@ -33,28 +33,28 @@ pip install -r requirements.txt
 
 40 progressive GPU programming challenges organized into 8 parts:
 
-### Part 1: Foundations (Puzzles 1-5)
+### Part 1: Foundations (Puzzles 0-4)
 Basic GPU concepts - thread indexing, global memory, shared memory, registers
 
-### Part 2: Tensors & Layouts (Puzzles 6-10)
+### Part 2: Tensors & Layouts (Puzzles 5-9)
 CuTe tensor basics, layout composition, coordinate systems, identity tensors
 
-### Part 3: Data Movement (Puzzles 11-15) - TBD
+### Part 3: Data Movement (Puzzles 10-14) - TBD
 Copy operations, vectorized loads, tiling, partitioning, zipped division
 
-### Part 4: Parallel Patterns (Puzzles 16-20) - TBD
+### Part 4: Parallel Patterns (Puzzles 15-19) - TBD
 Reductions (sum/min/max), matrix transpose, fused operations (AXPBY), custom binary ops
 
-### Part 5: Advanced Techniques (Puzzles 21-25) - TBD
+### Part 5: Advanced Techniques (Puzzles 20-24) - TBD
 Software pipelining, Tensor Cores, async copy, swizzling, basic GEMM
 
-### Part 6: Reductions & Pooling (Puzzles 26-30) - TBD
+### Part 6: Reductions & Pooling (Puzzles 25-29) - TBD
 Axis sum, warp reductions, max/avg pooling (1D/2D)
 
-### Part 7: Convolutions (Puzzles 31-35) - TBD
+### Part 7: Convolutions (Puzzles 30-34) - TBD
 Conv1D, Conv2D, separable/dilated/transposed convolutions
 
-### Part 8: Activation & Attention (Puzzles 36-40) - TBD
+### Part 8: Activation & Attention (Puzzles 35-39) - TBD
 Softmax, LayerNorm, scaled dot-product attention, multi-head attention, Flash Attention
 
 ## Key Concepts
