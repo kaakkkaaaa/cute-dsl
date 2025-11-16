@@ -64,13 +64,13 @@ def p09b():
 ```
 8×8 matrix divided into 4 tiles of 4×4:
 
-Tile (0,0):          Tile (0,1):
+Tile (0,0):               Tile (0,1):
 (0,0) (0,1) (0,2) (0,3) | (0,4) (0,5) (0,6) (0,7)
 (1,0) (1,1) (1,2) (1,3) | (1,4) (1,5) (1,6) (1,7)
 (2,0) (2,1) (2,2) (2,3) | (2,4) (2,5) (2,6) (2,7)
 (3,0) (3,1) (3,2) (3,3) | (3,4) (3,5) (3,6) (3,7)
---------------------|--------------------
-Tile (1,0):          Tile (1,1):
+------------------------|------------------------
+Tile (1,0):             | Tile (1,1):
 (4,0) (4,1) (4,2) (4,3) | (4,4) (4,5) (4,6) (4,7)
 (5,0) (5,1) (5,2) (5,3) | (5,4) (5,5) (5,6) (5,7)
 (6,0) (6,1) (6,2) (6,3) | (6,4) (6,5) (6,6) (6,7)
@@ -98,8 +98,6 @@ coord = identity[i, j]
 row = coord[0]    # i
 col = coord[1]    # j
 ```
-
-<br>
 
 ### <b>Why Identity Tensors?</b>
 
@@ -143,8 +141,6 @@ original = make_identity_tensor(shape)
 swizzled = apply_swizzle(original, swizzle_pattern)
 # Compare original vs swizzled coordinates
 ```
-
-<br>
 
 ### <b>Common Use Cases</b>
 
@@ -194,7 +190,6 @@ transposed = apply_transform(original, transposed_layout)
 # The value at each position IS the position
 identity[i, j] == (i, j)  # Always true!
 ```
-
 **Coordinate Preservation**:
 ```python
 # After transformations, you can trace back origins
@@ -202,7 +197,6 @@ transformed = apply_layout(identity, complex_layout)
 original_coord = transformed[new_i, new_j]
 # original_coord tells you where this came from!
 ```
-
 **Lightweight**:
 ```python
 # Identity tensors don't store actual data
@@ -237,9 +231,6 @@ cute.print_tensor(transformed)
 # - No overlaps
 # - Expected patterns (coalescing, etc.)
 ```
-
-<br>
-
 ### <b>Tips</b>
 - Identity tensors are pure metadata - no actual storage
 - Use for debugging before implementing with real data
