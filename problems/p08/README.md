@@ -3,8 +3,6 @@
 ### <b>Learning Objective</b>
 Master layout composition - a powerful technique for transforming coordinate spaces and creating complex access patterns.
 
-<br>
-
 ### <b>Part 8a: Understanding Base Layouts</b>
 
 Learn how layouts map coordinates to memory offsets.
@@ -37,8 +35,6 @@ Examples:
 (0,1) → 0×8 + 1×2 = 2
 (1,1) → 1×8 + 1×2 = 10
 ```
-
-<br>
 
 ### <b>Part 8b: Coordinate Transformers</b>
 
@@ -94,8 +90,6 @@ def p08c():
     return compose_kernel
 ```
 
-<br>
-
 ### <b>Key Concepts</b>
 
 **Layout Composition**: <br>
@@ -118,8 +112,6 @@ R(c) = A(B(c))
 - Tiling: Transform tile coordinates to global memory
 - Swizzling: Create permuted access patterns
 - Blocking: Map thread blocks to memory regions
-
-<br>
 
 ### <b>Composition Example</b>
 
@@ -158,8 +150,6 @@ Input   | B result | A coord | A offset | R result
 (1,2)   | 5        | (2,1)   | 18       | 18
 ...
 ```
-
-<br>
 
 ### <b>Hierarchical Result</b>
 
@@ -219,8 +209,6 @@ swizzle = make_swizzle_layout(...)
 swizzled_smem = composition(smem_layout, swizzle)
 ```
 
-<br>
-
 ### <b>Mathematical Perspective</b>
 
 **Function Composition**:
@@ -245,8 +233,6 @@ R(c) = (A ∘ B)(c) = A(B(c))
 I = make_layout((n,), stride=(1,))
 A ∘ I = I ∘ A = A
 ```
-
-<br>
 
 ### <b>Tips</b>
 - Composition applies transformations right-to-left: A ∘ B means "B first, then A"
