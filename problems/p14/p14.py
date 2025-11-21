@@ -168,9 +168,10 @@ def p14c():
     return run_kernel
 # ANCHOR_END: p14c
 
+# ANCHOR: p14d
 def p14d():
     """
-    Puzzle 15d: Shared Memory Optimization
+    Puzzle 14d: Shared Memory Optimization
     Demonstrates how to use shared memory with tiled matrix addition.
     """
 
@@ -236,6 +237,78 @@ def p14d():
         );
 
     return run_kernel
+# ANCHOR_END: p14d
+
+# ANCHOR: p14e
+def p14e():
+    """
+    Further optimized: Minimize redundant global memory access
+    Pattern used in real GEMM/Convolution kernel.
+    """
+
+    TILE_M = 32;
+    TILE_N = 32;
+
+    @cute.kernel
+    def optimized_smem_kernel(
+        tensorA: cute.Tensor,
+        tensorB: cute.Tensor,
+        tensorC: cute.Tensor
+    ):
+        tidx, tidy, _ = cute.arch.thread_idx();
+        bidx, bidy, _ = cute.arch.block_idx();
+
+        # Allocate shared memory
+        smem = cutlass.utils.SmemAllocator();
+        smem_layout = cute.make_layout((TILE_M, TILE_N));
+        tile_A_smem = smem.allocate_tensor(cutlass.Float32, smem_layout);
+        tile_B_smem = smem.allocate_tensor(cutlass.Float32, smem_layout);
+
+        # Calculate global position for bounds check
+        global_row = bidy * TILE_M + tidy;
+        global_col = bidx * TILE_N + tidx;
+
+        M = cute.size(tensorA.shape[0]);
+        N = cute.size(tensorA.shape[1]);
+
+        # Load to shared memory with bounds check
+        if global_row < M and global_col < N:
+            gA_tiled = cute.zipped_divide(tensorA, (TILE_M, TILE_N));
+            gB_tiled = cute.zipped_divide(tensorB, (TILE_M, TILE_N));
+
+            coord = ((tidy, tidx), (bidy, bidx));
+            tile_A_smem[(tidy, tidx)] = gA_tiled[coord];
+            tile_B_smem[(tidy, tidx)] = gB_tiled[coord];
+
+        # Synchronize before computing
+        cute.arch.sync_threads();
+
+        # Compute frfom shared memory
+        if global_row < M and global_col < N:
+            result = tile_A_smem[(tidy, tidx)] + tile_B_smem[(tidy, tidx)];
+
+            gC_tiled = cute.zipped_divide(tensorC, (TILE_M, TILE_N));
+            coord = ((tidy, tidx), (bidy, bidx));
+            gC_tiled[coord] = result;
+
+    @cute.jit
+    def run_kernel(
+        mA: cute.Tensor,
+        mB: cute.Tensor,
+        mC: cute.Tensor,
+    ):
+        M = cute.size(mA.shape[0]);
+        N = cute.size(mA.shape[1]);
+
+        grid_m = (M + TILE_M - 1) // TILE_M;
+        grid_n = (N + TILE_N - 1) // TILE_N;
+
+        optimized_smem_kernel(mA, mB, mC).launch(
+            grid=(grid_m, grid_n, 1),
+            block=(TILE_M, TILE_N, 1)
+        );
+
+    return run_kernel
 
 
 def main():
@@ -243,7 +316,7 @@ def main():
     Test and compare naive vs tiled implementations.
     """
     print("\n" + "="*80);
-    print("Puzzle 15: Zipped Divide - Practical Use Case");
+    print("Puzzle 14: Zipped Divide - Practical Use Case");
     print("="*80 + "\n");
 
     # Initialize CUDA context
@@ -322,6 +395,24 @@ def main():
     print(f"Correctness: {'✅ PASS' if correct else '✗ FAIL'}");
     if correct:
         max_diff = torch.max(torch.abs(C_mem - C_expected)).item();
+        print(f"Max difference: {max_diff:.2e}");
+
+    # ===== Test Optimized Version =====
+    print("\n" + "-"*70);
+    print("Optimized Shared Memory (32x32) tiles");
+    print("-"*70);
+
+    C_optim = torch.zeros(M, N, dtype=torch.float32, device="cuda");
+    C_optim_cute = from_dlpack(C_optim);
+
+    opt_kernel = p14e();
+    opt_kernel(A_cute, B_cute, C_optim_cute);
+    torch.cuda.synchronize();
+
+    correct = torch.allclose(C_optim, C_expected, rtol=1e-4, atol=1e-4);
+    print(f"Correctness: {'✅ PASS' if correct else '✗ FAIL'}");
+    if correct:
+        max_diff = torch.max(torch.abs(C_optim - C_expected)).item();
         print(f"Max difference: {max_diff:.2e}");
 
 if __name__ == "__main__":
