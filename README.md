@@ -39,7 +39,7 @@ Basic GPU concepts - thread indexing, global memory, shared memory, registers
 ### Part 2: Tensors & Layouts (Puzzles 5-9)
 CuTe tensor basics, layout composition, coordinate systems, identity tensors
 
-### Part 3: Data Movement (Puzzles 10-14) - TBD
+### Part 3: Data Movement (Puzzles 10-14)
 Copy operations, vectorized loads, tiling, partitioning, zipped division
 
 ### Part 4: Parallel Patterns (Puzzles 15-19) - TBD
