@@ -6,8 +6,7 @@ from cutlass.cute.runtime import from_dlpack
 # ANCHOR: p15a
 def p15a():
     """
-    Parallel Tree Reduction - No Separation Version
-    All logic in one @cute.jit function, but caller handles memory allocation
+    Parallel Tree Reduction
     """
     BLOCK_SIZE = 256;
     SMEM_BYTES = BLOCK_SIZE * 4;
