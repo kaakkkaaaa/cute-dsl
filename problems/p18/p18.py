@@ -3,7 +3,6 @@ import cutlass
 import cutlass.cute as cute
 from cutlass.cute.runtime import from_dlpack
 
-
 THREADS_PER_BLOCKS = 256;
 
 def p18():
