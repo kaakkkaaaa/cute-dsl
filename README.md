@@ -1,10 +1,10 @@
-# CuTe DSL GPU Puzzles 🧩 + Bonus 📦
+# CuTeDSL GPU Puzzles 🧩 + Bonus 📦
 
-A collection of GPU programming puzzles and examples using NVIDIA's CuTe DSL (Domain-Specific Language) for high-performance CUDA kernel development.
+A collection of GPU programming puzzles and examples using NVIDIA's CuTeDSL (Domain-Specific Language) for high-performance CUDA kernel development.
 
-## What is CuTe DSL?
+## What is CuTeDSL?
 
-CuTe DSL is a Python-native interface for writing high-performance CUDA kernels based on CUTLASS and CuTe concepts. It enables:
+CuTeDSL is a Python-native interface for writing high-performance CUDA kernels based on CUTLASS and CuTe concepts. It enables:
 - **Smooth learning curve** - Python syntax instead of deep C++ template metaprogramming
 - **Fast iteration** - Orders of magnitude faster compile times than C++
 - **Native DL framework integration** - No glue code needed for PyTorch/other frameworks
