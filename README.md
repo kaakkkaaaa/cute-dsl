@@ -42,11 +42,11 @@ CuTe tensor basics, layout composition, coordinate systems, identity tensors
 ### Part 3: Data Movement (Puzzles 10-14)
 Copy operations, vectorized loads, tiling, partitioning, zipped division
 
-### Part 4: Parallel Patterns (Puzzles 15-19) - TBD
+### Part 4: Parallel Patterns (Puzzles 15-19)
 Reductions (sum/min/max), matrix transpose, fused operations (AXPBY), custom binary ops
 
 ### Part 5: Advanced Techniques (Puzzles 20-24) - TBD
-Software pipelining, Tensor Cores, async copy, swizzling, basic GEMM
+Pipelining, Tensor Cores, async copy, swizzling, basic GEMM
 
 ### Part 6: Reductions & Pooling (Puzzles 25-29) - TBD
 Axis sum, warp reductions, max/avg pooling (1D/2D)
